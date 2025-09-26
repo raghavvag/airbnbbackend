@@ -42,4 +42,6 @@ public class Hotel {
     private LocalDateTime updatedAt;
     @Embedded
     private HotelContactInfo hotelContactInfo;
+    @Column(nullable = false)
+    private Boolean isActive;
 }

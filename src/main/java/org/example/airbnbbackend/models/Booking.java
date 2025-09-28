@@ -3,7 +3,9 @@ package org.example.airbnbbackend.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.airbnbbackend.models.enums.BookingStatus;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
@@ -36,5 +38,10 @@ public class Booking {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+    @OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="payment_id")
+    private Payment payment;
+    @Enumerated(EnumType.STRING)
 
+    private BookingStatus bookingStatus;
 }

@@ -44,4 +44,6 @@ public class Hotel {
     private HotelContactInfo hotelContactInfo;
     @Column(nullable = false)
     private Boolean isActive;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Room> rooms;
 }

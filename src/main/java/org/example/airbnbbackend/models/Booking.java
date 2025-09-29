@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -42,6 +43,13 @@ public class Booking {
     @JoinColumn(name="payment_id")
     private Payment payment;
     @Enumerated(EnumType.STRING)
-
+    @Column(nullable = false)
     private BookingStatus bookingStatus;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "booking_guests",
+            joinColumns = @JoinColumn(name = "booking_id"),
+            inverseJoinColumns = @JoinColumn(name = "guest_id")
+    )
+    private List<Guest> guests;
 }

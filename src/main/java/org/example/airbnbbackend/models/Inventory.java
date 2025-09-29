@@ -17,7 +17,8 @@ import java.util.Date;
 @Table(
         name = "inventories",
             uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"room_id","hotel_id", "date"})
+
+            @UniqueConstraint(  name="unique_room_hotel_date",columnNames = {"room_id","hotel_id", "date"})
 })
 public class Inventory {
     @Id

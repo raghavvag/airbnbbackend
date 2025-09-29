@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.airbnbbackend.models.enums.Gender;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity

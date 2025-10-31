@@ -2,7 +2,9 @@ package org.example.airbnbbackend.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "hotels")
+@Getter
+@Setter
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

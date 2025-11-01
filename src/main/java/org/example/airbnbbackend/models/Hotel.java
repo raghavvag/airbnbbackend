@@ -50,4 +50,6 @@ public class Hotel {
     private Boolean isActive;
     @OneToMany(fetch = FetchType.LAZY)
     private List<Room> rooms;
+    @ManyToOne
+    private  User owner;
 }

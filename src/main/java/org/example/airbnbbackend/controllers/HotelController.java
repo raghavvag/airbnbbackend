@@ -2,6 +2,7 @@ package org.example.airbnbbackend.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.example.airbnbbackend.dtos.HotelDto;
+
 import org.example.airbnbbackend.services.HotelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -23,6 +24,12 @@ public class HotelController {
     public ResponseEntity<HotelDto>getHotelById(@PathVariable Long id){
         HotelDto hotelDto=hotelService.getHotelById(id);
         return new ResponseEntity<>(hotelDto, HttpStatus.OK);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<HotelDto>updateHotelbyid(@PathVariable Long id,@RequestBody HotelDto hotelDto){
+        //to be implemented
+        HotelDto hotelDto1=hotelService.updateHotelbyid(id,hotelDto);
+        return new ResponseEntity<>(hotelDto,HttpStatus.OK);
     }
 
 }

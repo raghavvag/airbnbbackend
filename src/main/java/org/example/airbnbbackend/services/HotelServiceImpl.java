@@ -9,6 +9,8 @@ import org.example.airbnbbackend.repositories.HotelRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -32,5 +34,24 @@ public class HotelServiceImpl implements HotelService {
         Hotel hotel=hotelRepository.findById(id).orElseThrow(()->new ResourceNotFounfException("Hotel not found with id "+id));
         return modelMapper.map(hotel, HotelDto.class);
 
+    }
+
+    @Override
+    public HotelDto updateHotelbyid(Long id, HotelDto hotelDto) {
+        Optional<Hotel> hotel=hotelRepository.findById(hotelDto.getId());
+        if(hotel.isPresent()){
+            Hotel existingHotel=hotel.get();
+            existingHotel.setName(hotelDto.getName());
+            existingHotel.setCity(hotelDto.getCity());
+            existingHotel.setPhotos(hotelDto.getPhotos());
+            existingHotel.setAmenities(hotelDto.getAmenities());
+            existingHotel.setHotelContactInfo(hotelDto.getHotelContactInfo());
+            existingHotel.setIsActive(hotelDto.getIsActive());
+            hotelRepository.save(existingHotel);
+            return modelMapper.map(existingHotel, HotelDto.class);
+        }
+        else{
+            throw new ResourceNotFounfException("Hotel not found with id "+id);
+        }
     }
 }

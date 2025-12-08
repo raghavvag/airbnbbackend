@@ -6,4 +6,6 @@ import org.example.airbnbbackend.models.Hotel;
 public interface HotelService {
     HotelDto createHotel(HotelDto hotel);
     HotelDto getHotelById(Long id);
+
+    HotelDto updateHotelbyid(Long id, HotelDto hotelDto);
 }

@@ -58,5 +58,15 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public void deleteHotelById(Long id) {
         Hotel hotel=hotelRepository.findById(id).orElseThrow(()->new ResourceNotFounfException("Hotel not found with id "+id));
+        hotelRepository.delete(hotel);
+
+    }
+
+    @Override
+    public void activateHotel(Hotel hotel) {
+        Hotel hotel1=hotelRepository.findById(hotel.getId()).orElseThrow(()->new ResourceNotFounfException("Hotel not found with id "+hotel.getId()));
+        hotel1.setIsActive(true);
+        hotelRepository.save(hotel1);
+
     }
 }

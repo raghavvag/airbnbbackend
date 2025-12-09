@@ -63,8 +63,8 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public void activateHotel(Hotel hotel) {
-        Hotel hotel1=hotelRepository.findById(hotel.getId()).orElseThrow(()->new ResourceNotFounfException("Hotel not found with id "+hotel.getId()));
+    public void activateHotel(Long id) {
+        Hotel hotel1=hotelRepository.findById(id).orElseThrow(()->new ResourceNotFounfException("Hotel not found with id "+id));
         hotel1.setIsActive(true);
         hotelRepository.save(hotel1);
 

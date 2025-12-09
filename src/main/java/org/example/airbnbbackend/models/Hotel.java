@@ -48,7 +48,7 @@ public class Hotel {
     private HotelContactInfo hotelContactInfo;
     @Column(nullable = false)
     private Boolean isActive;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "hotel")
     private List<Room> rooms;
     @ManyToOne
     private  User owner;

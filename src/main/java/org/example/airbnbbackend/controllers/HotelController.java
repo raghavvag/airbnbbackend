@@ -3,6 +3,7 @@ package org.example.airbnbbackend.controllers;
 import lombok.RequiredArgsConstructor;
 import org.example.airbnbbackend.dtos.HotelDto;
 
+import org.example.airbnbbackend.models.Hotel;
 import org.example.airbnbbackend.services.HotelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -32,9 +33,15 @@ public class HotelController {
         return new ResponseEntity<>(hotelDto,HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void>deleteHotelById(@PathVariable Long id){
+    public ResponseEntity<Void>deleteHotelById(@PathVariable Long id) {
         hotelService.deleteHotelById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @PatchMapping("/setactivate/{id}")
+    public ResponseEntity<Void>setHotelActive(@PathVariable Long id){
+        hotelService.activateHotel(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 
 }

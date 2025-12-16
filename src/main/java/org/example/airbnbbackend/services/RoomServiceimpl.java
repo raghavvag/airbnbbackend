@@ -31,7 +31,7 @@ public class RoomServiceimpl implements RoomService {
     }
 
     @Override
-    public List<RoomDto> getroomsbyotel(Long HotelId) {
+    public List<RoomDto> getroomsbyhotelid(Long HotelId) {
         Hotel hotel=hotelRepository.findById(HotelId).orElseThrow(()->new ResourceNotFounfException("Hotel not found with id "+HotelId));
         return hotel.getRooms()
                 .stream()
@@ -41,11 +41,14 @@ public class RoomServiceimpl implements RoomService {
 
     @Override
     public RoomDto getroombyid(Long roomid) {
-        return null;
+        Room room=roomRepository.findById(roomid).orElseThrow(()->new ResourceNotFounfException("Room not found with id "+roomid));
+
+        return modelMapper.map(room,RoomDto.class);
     }
 
     @Override
     public void DeleteRoom(Long roomid) {
-
+        Room room=roomRepository.findById(roomid).orElseThrow(()->new ResourceNotFounfException("Room not found with id "+roomid));
+        roomRepository.delete(room);
     }
 }

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.airbnbbackend.dtos.HotelDto;
 import org.example.airbnbbackend.exceptions.ResourceNotFounfException;
 import org.example.airbnbbackend.models.Hotel;
+import org.example.airbnbbackend.models.Room;
 import org.example.airbnbbackend.repositories.HotelRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class HotelServiceImpl implements HotelService {
     private final HotelRepository hotelRepository;
     private final ModelMapper modelMapper;
+    private final InventoryService inventoryService;
     @Override
     public HotelDto createHotel(HotelDto hotelDto) {
         log.info("creating hotel with hotel name",hotelDto.getName());
@@ -24,6 +26,7 @@ public class HotelServiceImpl implements HotelService {
         hotel.setIsActive(false);
         hotel=hotelRepository.save(hotel);
         log.info("created hotel with hotel name",hotelDto.getName());
+
         return modelMapper.map(hotel, HotelDto.class);
 
     }
@@ -67,6 +70,8 @@ public class HotelServiceImpl implements HotelService {
         Hotel hotel1=hotelRepository.findById(id).orElseThrow(()->new ResourceNotFounfException("Hotel not found with id "+id));
         hotel1.setIsActive(true);
         hotelRepository.save(hotel1);
-
+        for(Room room: hotel1.getRooms()){
+            inventoryService.initialiseroomforoneyear(room);
+        }
     }
 }

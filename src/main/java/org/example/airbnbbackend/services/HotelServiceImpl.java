@@ -1,5 +1,6 @@
 package org.example.airbnbbackend.services;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.airbnbbackend.dtos.HotelDto;
@@ -59,9 +60,15 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
+    @Transactional
     public void deleteHotelById(Long id) {
-        Hotel hotel=hotelRepository.findById(id).orElseThrow(()->new ResourceNotFounfException("Hotel not found with id "+id));
+        Hotel hotel=hotelRepository
+                .findById(id)
+                .orElseThrow(()->new ResourceNotFounfException("Hotel not found with id "+id));
         hotelRepository.delete(hotel);
+        for(Room room : hotel.getRooms()){
+            inventoryService.Deletefutureinventory(room);
+        }
 
     }
 

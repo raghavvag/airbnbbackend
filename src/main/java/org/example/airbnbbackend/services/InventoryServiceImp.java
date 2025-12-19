@@ -2,9 +2,12 @@ package org.example.airbnbbackend.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.airbnbbackend.dtos.HotelDto;
+import org.example.airbnbbackend.dtos.SearchRequestDto;
 import org.example.airbnbbackend.models.Inventory;
 import org.example.airbnbbackend.models.Room;
 import org.example.airbnbbackend.repositories.InventoryRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -41,5 +44,10 @@ public class InventoryServiceImp implements InventoryService {
     public void Deletefutureinventory(Room room) {
         LocalDate today = LocalDate.now();
         inventoryRepository.deleteByRoomAndDateAfter(room, today);
+    }
+
+    @Override
+    public Page<HotelDto> searchhotels(SearchRequestDto searchRequestDto) {
+        return null;
     }
 }

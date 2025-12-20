@@ -8,6 +8,7 @@ import org.example.airbnbbackend.models.Inventory;
 import org.example.airbnbbackend.models.Room;
 import org.example.airbnbbackend.repositories.InventoryRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -48,6 +49,6 @@ public class InventoryServiceImp implements InventoryService {
 
     @Override
     public Page<HotelDto> searchhotels(SearchRequestDto searchRequestDto) {
-        return null;
+        pageable = PageRequest.of(searchRequestDto.getPageNumber(), searchRequestDto.getPageSize());
     }
 }
